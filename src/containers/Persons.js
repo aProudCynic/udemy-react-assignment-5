@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actionTypes from '../store/actionTypes'
 
 import Person from '../components/Person/Person';
 import AddPerson from '../components/AddPerson/AddPerson';
@@ -14,7 +16,7 @@ class Persons extends Component {
             name: 'Max',
             age: Math.floor( Math.random() * 40 )
         }
-        this.setState( ( prevState ) => {
+        this.props.onPersonAdded( ( prevState ) => {
             return { persons: prevState.persons.concat(newPerson)}
         } );
     }
@@ -41,4 +43,10 @@ class Persons extends Component {
     }
 }
 
-export default Persons;
+const mapDispatchToProps = dispatch => {
+    return {
+        onPersonAdded: (person) => dispatch({type: actionTypes.ADD_PERSON, newPerson: person})
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Persons);

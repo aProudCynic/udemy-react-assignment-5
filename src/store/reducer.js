@@ -5,6 +5,7 @@ const initialState = {
 }
 
 const reducer = (oldState = initialState, action) => {
+    console.log('Oh hi!')
     if (action.type === ADD_PERSON) {
         return { ...oldState,
             persons: [...oldState.persons, action.newPerson] };
