@@ -1,4 +1,4 @@
-import { ADD_PERSON } from './actionTypes';
+import { ADD_PERSON, REMOVE_PERSON } from './actionTypes';
 
 const initialState = {
     persons: [],
@@ -9,6 +9,11 @@ const reducer = (oldState = initialState, action) => {
     if (action.type === ADD_PERSON) {
         return { ...oldState,
             persons: [...oldState.persons, action.newPerson] };
+    }
+    if (action.type === REMOVE_PERSON) {
+        console.log(action.idOfPersonToRemove)
+        const personsWithoutDeletedMember = oldState.persons.filter(personInState => personInState.id !== action.idOfPersonToRemove);
+        return {persons: personsWithoutDeletedMember}
     }
     return oldState;
 }
